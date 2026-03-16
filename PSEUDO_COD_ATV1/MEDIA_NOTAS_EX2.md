@@ -3,9 +3,9 @@ inicio
     ler nota B
     soma nota A + nota B
     divide resultado / 2
-    mostrar resultado
+    mostra resultado
 
-        se (resultado >= 7) então escreva "APROVADO"
-        senão escreva "REPROVADO"
-        fim-se
+    se (resultado >= 7) então escreva "APROVADO"
+    senão escreva "REPROVADO"
+    fim-se
 fim

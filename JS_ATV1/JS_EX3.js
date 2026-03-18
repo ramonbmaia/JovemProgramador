@@ -1,2 +1,2 @@
-let mensagem = "Olá, mundo!"
-console.log(mensagem)
+let mensagem = "Olá, mundo!";
+console.log(mensagem);

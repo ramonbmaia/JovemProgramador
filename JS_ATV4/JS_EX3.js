@@ -1,15 +1,11 @@
-let numero = 5;
+let numero = 0.1;
 
-switch (true) {
-    case (numero === 0):
-        console.log("O número é zero!");
-        break;
-    case (numero > 0):
-        console.log(numero + " é positivo!");
-        break;
-    case (numero < 0):
-        console.log(numero + " é negativo!");
-        break;
-    default:
-        console.log(numero + "é invalido!");
+if (numero > 0) {
+    console.log(numero + " é positivo!");
+}
+else if (numero < 0) {
+    console.log(numero + " é negativo!");
+}
+else {
+    console.log("O número é zero!");
 }

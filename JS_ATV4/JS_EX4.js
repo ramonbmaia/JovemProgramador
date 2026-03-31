@@ -1,4 +1,4 @@
-let bebida = 7;
+let bebida = 2;
 
 switch (bebida) {
     case 1:

@@ -1,4 +1,4 @@
-let numero = 0.1;
+let numero = 15;
 
 if (numero > 0) {
     console.log(numero + " é positivo!");

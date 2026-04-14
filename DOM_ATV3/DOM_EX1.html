@@ -15,15 +15,23 @@
             color: white;
         }
         .telaLogin {
-            display: block;
-            width: 300px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            width: 350px;
             height: 200px;
+            margin: 0;
             background-color: rgb(22, 26, 82);
             justify-self: center;
             align-content: center;
             text-align: center;
             border-radius: 15px;
-         }
+        }
+        label {
+            color: white;
+            align-content: center;
+            margin-right: -15px;
+            font-size: 14px;
+        }
         #email, #senha {
             display: block;
             justify-self: center;
@@ -67,7 +75,9 @@
         <h2>Tela de Login</h2>
     </header>
     <div class="telaLogin">
-        <input id="email" type="email" placeholder="Insira o e-mail">
+        <label for="email">E-mail:</label>
+        <input id="email" type="email" placeholder="exemplo@email.com">
+        <label for="email">Senha:</label>
         <input id="senha" type="password" placeholder="Insira a senha">
         <button id="login" onclick="login()">Login</button>
     </div>

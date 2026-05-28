@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizzaria Sabor da Praça - Locpedia</title>
+    <style>
+        /* ============================================================================
+           RESET & BASE (Mantido do modelo original)
+           ============================================================================ */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --background: #0a0e1a;
+            --foreground: #f0f4f8;
+            --card: #1a2332;
+            --border: rgba(148, 163, 184, 0.15);
+            --primary: #10b981;
+            --secondary: #f59e0b;
+            --accent: #3b82f6;
+            --muted: #1e293b;
+            --muted-foreground: #94a3b8;
+            --destructive: #ef4444;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--background);
+            color: var(--foreground);
+            line-height: 1.6;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+        /* ============================================================================
+           HEADER SIMPLIFICADO
+           ============================================================================ */
+        .header {
+            background: rgba(26, 35, 50, 0.8);
+            backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .header-content { display: flex; align-items: center; justify-content: space-between; }
+        .logo-text { font-size: 1.25rem; font-weight: 600; color: var(--foreground); }
+        .logo-text span { color: var(--primary); }
+
+        /* ============================================================================
+           UI/UX DO PERFIL DA EMPRESA
+           ============================================================================ */
+        .perfil-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 1.25rem;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Banner e Foto de Perfil */
+        .perfil-banner {
+            height: 200px;
+            background: linear-gradient(135deg, var(--muted), #2a3a5a);
+            position: relative;
+        }
+        .perfil-avatar-wrapper {
+            position: absolute;
+            bottom: -40px;
+            left: 2rem;
+            width: 100px;
+            height: 100px;
+            background: var(--card);
+            border-radius: 50%;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .perfil-avatar {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        /* Informações Principais */
+        .perfil-info {
+            padding: 3.5rem 2rem 2rem 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .perfil-header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .perfil-nome {
+            font-size: 1.875rem;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 0.25rem;
+        }
+        .perfil-categoria {
+            color: var(--muted-foreground);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        .status-aberto {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--primary);
+            padding: 0.35rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        /* Botões de Ação Rápida */
+        .acoes-rapidas {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+            font-size: 0.95rem;
+        }
+        .btn-primario {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+        }
+        .btn-primario:hover { opacity: 0.9; transform: translateY(-2px); }
+        
+        .btn-secundario {
+            background: var(--muted);
+            color: var(--foreground);
+            border: 1px solid var(--border);
+        }
+        .btn-secundario:hover { background: rgba(240, 244, 248, 0.1); }
+
+        /* Dados Fixos */
+        .dados-contato {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px dashed var(--border);
+            color: var(--muted-foreground);
+            font-size: 0.95rem;
+        }
+        .dado-item strong { color: var(--foreground); }
+
+        /* Feed de Notas */
+        .secao-feed { padding: 2rem; }
+        .secao-titulo {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .secao-titulo::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 24px;
+            background: var(--accent);
+            border-radius: 4px;
+        }
+        .nota {
+            background: var(--muted);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        .nota-tempo {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            font-size: 0.75rem;
+            color: var(--muted-foreground);
+        }
+        .nota-texto {
+            font-size: 1rem;
+            color: var(--foreground);
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .interacao-nota {
+            display: flex;
+            gap: 1rem;
+            border-top: 1px solid var(--border);
+            padding-top: 0.75rem;
+        }
+        .btn-curtir {
+            background: none;
+            border: none;
+            color: var(--muted-foreground);
+            cursor: pointer;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        .btn-curtir.curtido { color: var(--destructive); }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+            <h1 class="logo-text">Loc<span>pedia</span></h1>
+            <button class="btn btn-secundario" style="padding: 0.5rem 1rem;">Voltar</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="perfil-container">
+            
+            <div class="perfil-banner">
+                <div class="perfil-avatar-wrapper">
+                    <div class="perfil-avatar">SP</div> </div>
+            </div>
+
+            <div class="perfil-info">
+                <div class="perfil-header-flex">
+                    <div>
+                        <h2 class="perfil-nome">Pizzaria Sabor da Praça</h2>
+                        <p class="perfil-categoria">Alimentação • $$$ • 4.8 Estrelas</p>
+                        <div class="status-aberto">
+                            <span style="display:inline-block; width:8px; height:8px; background:var(--primary); border-radius:50%;"></span>
+                            Aberto Agora (Check-in recente)
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <button id="btnFavoritar" class="btn btn-secundario" onclick="favoritarLocal()">
+                            ❤️ Salvar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="acoes-rapidas">
+                    <button class="btn btn-primario" onclick="revelarTelefone()">
+                        <span id="txtTelefone">Ver Telefone</span>
+                    </button>
+                    <button class="btn btn-secundario" onclick="abrirMapa()">
+                        📍 Como Chegar
+                    </button>
+                </div>
+
+                <div class="dados-contato">
+                    <div class="dado-item"><strong>Endereço:</strong> Centro, São Miguel do Oeste - SC</div>
+                    <div class="dado-item"><strong>Horário:</strong> Terça a Domingo, das 18h às 23:30h</div>
+                </div>
+            </div>
+
+            <div class="secao-feed">
+                <h3 class="secao-titulo">Mural de Notas</h3>
+
+                <div class="nota">
+                    <div class="nota-tempo">Há 2 horas</div>
+                    <p class="nota-texto">
+                        Pessoal, hoje a taxa de entrega no centro e bairros vizinhos é por nossa conta até as 21h! 🍕 Pede pelo Whats!
+                    </p>
+                    <div class="interacao-nota">
+                        <button id="btnLike1" class="btn-curtir" onclick="curtirNota1()">
+                            <span id="iconeLike1">❤️</span> <span id="contadorLike1">12</span> Útil
+                        </button>
+                    </div>
+                </div>
+
+                <div class="nota">
+                    <div class="nota-tempo">Há 5 horas</div>
+                    <p class="nota-texto">
+                        Acabou de sair fornada do nosso pão de alho especial recheado. Corre que acaba rápido! 🔥
+                    </p>
+                    <div class="interacao-nota">
+                        <button id="btnLike2" class="btn-curtir" onclick="curtirNota2()">
+                            <span id="iconeLike2">❤️</span> <span id="contadorLike2">8</span> Útil
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let telefoneVisivel = "falso";
+        let localSalvo = "nao";
+        
+        let curtidasNota1 = 12;
+        let curtidasNota2 = 8;
+
+        function revelarTelefone() {
+            if (telefoneVisivel == "falso") {
+                document.getElementById("txtTelefone").innerHTML = "📞 (49) 98888-0000";
+                telefoneVisivel = "verdadeiro";
+            } else {
+                alert("Abrindo o WhatsApp da pizzaria...");
+            }
+        }
+
+        function favoritarLocal() {
+            if (localSalvo == "nao") {
+                document.getElementById("btnFavoritar").innerHTML = "❤️ Salvo";
+                document.getElementById("btnFavoritar").style.color = "var(--primary)";
+                document.getElementById("btnFavoritar").style.borderColor = "var(--primary)";
+                localSalvo = "sim";
+            } else {
+                document.getElementById("btnFavoritar").innerHTML = "❤️ Salvar";
+                document.getElementById("btnFavoritar").style.color = "var(--foreground)";
+                document.getElementById("btnFavoritar").style.borderColor = "var(--border)";
+                localSalvo = "nao";
+            }
+        }
+
+        function curtirNota1() {
+            curtidasNota1++;
+            document.getElementById("contadorLike1").innerText = curtidasNota1;
+            document.getElementById("iconeLike1").innerHTML = "❤️";
+            document.getElementById("btnLike1").className = "btn-curtir curtido";
+        }
+
+        function curtirNota2() {
+            curtidasNota2++;
+            document.getElementById("contadorLike2").innerText = curtidasNota2;
+            document.getElementById("iconeLike2").innerHTML = "❤️";
+            document.getElementById("btnLike2").className = "btn-curtir curtido";
+        }
+
+        function abrirMapa() {
+            alert("Redirecionando para o aplicativo de mapas...");
+        }
+    </script>
+</body>
+</html>
